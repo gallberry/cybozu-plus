@@ -1,0 +1,18 @@
+{
+	"manifest_version": 2,
+	"name": "Cybozu Plus",
+	"version": "0.1.0",
+	"browser_action": {
+		"default_popup": "popup.html"
+	},
+	"content_scripts": [
+		{
+			"matches": ["http://*/*"],
+			"js": ["jquery-2.1.4.min.js", "content-cybozu.js"]
+		}
+	],
+	"permissions": [
+		"http://*/*",
+		"https://*/*"
+	]
+}
