@@ -1,7 +1,8 @@
 {
 	"manifest_version": 2,
 	"name": "Cybozu Plus (Unofficial)",
-	"version": "0.1.0",
+	"short_name": "Cybozu+",
+	"version": "0.1.1",
 	"icons": {
 		"16" : "icon16.png",
 		"48" : "icon48.png",
