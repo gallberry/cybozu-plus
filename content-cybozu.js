@@ -23,4 +23,17 @@ $(function() {
 			$('title').text(s_subject);
 		}
 	}
+
+	// オプション設定を用いた処理
+	chrome.storage.sync.get({
+		highlight_name: ''
+	}, function(items) {
+		// 通知先をハイライト
+		var mention = $('span.js-mention-uid');
+		for (var i=0,len=mention.length; i<len; i++) {
+			if($($('span.js-mention-uid')[i]).attr('data-name') === items.highlight_name) {
+				$($('span.js-mention-uid')[i]).css('background-color', 'black').css('color', 'white');
+			}
+		}
+	});
 });

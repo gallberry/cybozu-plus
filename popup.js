@@ -2,17 +2,21 @@
 
 
 $(function() {
+	// 全てのタブのURL配列
+	var a_tabs_url = [];
+
 	/**
 	 *すべてのタブに対する操作
 	 */
 	chrome.tabs.getAllInWindow(window.id, function(tabs) {
+		var a_tabs = [];
 		// タブの一覧を表示して、選択したタブに移動する
 		// ※取得できるタブの種類はmanifestのpermissionsで定義
-		var a_tabs = [];
 		for (var i=0,len=tabs.length; i<len; i++) {
 			if ('title' in tabs[i]) {
 				// console.log(tabs[i]);
 				a_tabs.push('<a class="Act_ShowTab" data-tabid="' + tabs[i].id + '">' + tabs[i].title + '</a><br>');
+				a_tabs_url.push(tabs[i].url);
 			}
 		}
 		// 一覧表示エリアにタイトルリストを表示
@@ -33,7 +37,18 @@ $(function() {
 	/**
 	 * イベントアクション
 	 */
-
+	// 開いているタブのURLを一括コピー
+	$('#Act_Copy_AllUrls').click(function() {
+		// chrome.tabs.getSelected(window.id, function(tab) {
+			var temp = document.createElement('textarea');
+			temp.value = a_tabs_url.join('\n');
+			document.body.appendChild(temp);
+			temp.select();
+			var result = document.execCommand('copy');
+			temp.blur();
+			document.body.removeChild(temp);
+		// });
+	});
 	// QRコードを表示する
 	$('#Act_Show_Qr').click(function() {
 		chrome.tabs.getSelected(window.id, function(tab) {
